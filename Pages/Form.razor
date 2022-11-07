@@ -1,0 +1,96 @@
+@page "/form"
+
+<PageTitle>Form</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<labal>name</labal>
+<input @bind="sender" type="text">
+<br>
+<label>besked</label>
+<input @bind="msg" type="text">
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+
+
+@code {
+    /*@foreach (var todo in todos)
+    {
+        <li>
+            <p>@todo.sender</p>
+            <p>@todo.msg</p>
+        </li>
+    }
+    */
+    private int currentCount = 0;
+
+    private string? sender;
+    private string? msg;
+
+    //private List<mysqlefcore.Massege> todos = new();
+
+    private void IncrementCount()
+    {
+        currentCount++;
+
+        InsertData(sender, msg);
+    }
+
+     private void InsertData(string x, string y)
+    {
+      using(var context = new mysqlefcore.LibraryContext())
+      {
+        // Creates the database if not exists
+        context.Database.EnsureCreated();
+
+        // Adds a publisher
+        //var publisher = new mysqlefcore.Massege(x, y);
+        
+        //context.msg.Add(publisher);
+        
+        // Saves changes
+        context.SaveChanges();
+      }
+    }
+      
+    private string PrintData()
+    {
+      // Gets and prints all books in database
+      using (var context = new mysqlefcore.LibraryContext())
+      {
+        //var books = context.msg;
+          //.Include(p => p.Publisher);
+
+        //var select = context.msg;
+
+        /*
+        foreach(var p in select){
+          Console.WriteLine($"{p.Title}: {p.Pages}p");
+        }
+        
+
+        foreach(var book in books)
+        {
+          var data = new System.Text.StringBuilder();
+          data.AppendLine($"ISBN: {book.ISBN}");
+          data.AppendLine($"Title: {book.Title}");
+          data.AppendLine();
+          //data.AppendLine($"Publisher: {book.Publisher.Name}");
+          Console.WriteLine(data.ToString());
+        }
+        */
+        /*
+        foreach(var book in books)
+        {
+            return book.sender;
+        }
+        */
+
+        return null;
+
+    }
+}
+}
